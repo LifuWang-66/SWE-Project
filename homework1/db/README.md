@@ -13,3 +13,24 @@ Imagine that you are building a ChatGPT app that allows users to ask questions a
 
 ## Answer:
 TODO: you need to add your sql query to each task here.
+
+CREATE DATABASE IF NOT EXISTS chatgpt;
+use chatgpt;
+
+create table if not exists users (
+  id int auto_increment,
+  username varchar(15),
+  password varchar(15),
+  email varchar(20),
+  primary key(id)
+);
+
+create table if not exists conversations (
+  id int auto_increment,
+  user_id int,
+  question varchar(200),
+  answer varchar(200),
+  timestamp char(10),
+  primary key(id),
+  constraint question_fk1 foreign key (user_id) references users(id)
+);

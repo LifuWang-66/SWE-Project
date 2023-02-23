@@ -11,6 +11,10 @@ const LoginPage = () => {
     setUsername(event.target.value);
   };
 
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -22,6 +26,41 @@ const LoginPage = () => {
 
     // TODO: Send a request to the server to verify the username and password
     // Redirect to chat page if logged in successfully
+    fetch(`http://127.0.0.1:5000/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        username,
+        password
+      })
+    })
+      .then((res) => {
+        console.log(res)
+        if (!res.ok) {
+          console.error('Response not OK:', res.status, res.statusText);
+          throw new Error(res.statusText);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data)
+        if (data.error) {
+          setError(data.error);
+        } else {
+          // Save the username in local storage
+          localStorage.setItem('username', username);
+
+          // Redirect the user to the chat page
+          window.location.href = '/chat';
+        }
+      })
+      .catch((err) => {
+        setError("An error occurred while trying to sign up");
+        console.error(err);
+      });
   };
 
   return (
@@ -34,6 +73,12 @@ const LoginPage = () => {
           onChange={handleUsernameChange}
         />
         {/* TODO add an input for password */}
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={handlePasswordChange}
+        />
         <button type="submit">Login</button>
       </form>
       <Link className="signup-link" to="/signup">Create an account</Link>
