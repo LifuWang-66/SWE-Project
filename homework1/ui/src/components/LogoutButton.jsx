@@ -6,7 +6,7 @@ const LogoutButton = () => {
     // TODO: Perform logout action here, removing the username from local storage
     // Redirect the user to the login page
     setUsername(localStorage.getItem('username'))
-    fetch(`http://127.0.0.1:5000/logout`, {
+    fetch(`http://flask-api/logout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

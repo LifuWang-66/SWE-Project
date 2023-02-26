@@ -1,0 +1,36 @@
+# flask-api-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask-api
+  template:
+    metadata:
+      labels:
+        app: flask-api
+    spec:
+      containers:
+      - name: flask-api
+        image: docker.io/library/api:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
+
+# react-ui-service.yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-api
+spec:
+  selector:
+    app: flask-api
+  ports:
+  - name: http
+    port: 5000
+    targetPort: 5000
+  type: ClusterIP

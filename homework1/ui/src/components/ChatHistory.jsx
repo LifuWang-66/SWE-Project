@@ -6,7 +6,7 @@ const ChatHistory = ({ history }) => {
   const handleClick = () => {
     console.log(history_resumed)
     if (!history_resumed) {
-      fetch(`http://127.0.0.1:5000/chat_history`, {
+      fetch(`http://flask-api/chat_history`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

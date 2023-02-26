@@ -26,7 +26,7 @@ const LoginPage = () => {
 
     // TODO: Send a request to the server to verify the username and password
     // Redirect to chat page if logged in successfully
-    fetch(`http://127.0.0.1:5000/login`, {
+    fetch(`http://flask-api/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

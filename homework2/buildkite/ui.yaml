@@ -2,7 +2,7 @@ steps:
   - command: "./homework1/install_mac.sh"
     label: "prepare_env"
 
-  - command: " docker build -f ./homework2/docker/ui.Dockerfile -t ui:now_latest ./homework1/ui/"
+  - command: " docker build -f ./homework2/docker/ui.Dockerfile -t ui:latest ./homework1/ui/"
     label: "docker build ui"
 
   - command: "kubectl apply -f ./homework2/kubernetes/ui/deployment.yaml"

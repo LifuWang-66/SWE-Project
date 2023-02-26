@@ -17,7 +17,7 @@ const ChatView = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // TODO: Send the input to an API to get the response from AI
-    fetch(`http://127.0.0.1:5000/chat`, {
+    fetch(`http://flask-api/chat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
